@@ -41,7 +41,7 @@ function App() {
     };
 
     if (Object.keys(validators).includes(name)) {
-      const fieldName = name as IFieldName; // type narrowing
+      const fieldName = name as IFieldName;
       const isValid = validators[fieldName].test(value);
 
       setError((prevError) => ({
