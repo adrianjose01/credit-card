@@ -1,13 +1,197 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+* {
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+form {
+  border: 1px solid black;
+  padding: 4rem;
+  border-radius: 0.5rem;
+  padding-top: 6rem;
+}
+
+.form-field {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.form-field div {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.3rem;
+}
+
+.form-field div label {
+  font-weight: bolder;
+}
+
+.form-field div input {
+  padding: 0.2rem;
+  border-radius: 0.4rem;
+  border: 1.5px solid rgba(193, 194, 195, 0.7);
+  height: 1.8rem;
+}
+
+.buttons-container {
+  margin: 3rem 0 0 0;
+  display: flex;
+  gap: 0.8rem;
+}
+
+.buttons-container button {
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.8rem;
+  border: none;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.buttons-container #add-card-button {
+  background-color: rgb(71 65 222);
+  color: white;
+}
+
+.buttons-container #cancel-button {
+  color: rgb(194 194 194);
+}
+
+/* CREDIT CARD */
+
+.credit-card-container {
+  position: absolute;
+  background: rgb(17 23 35);
+  height: 14.5rem;
+  width: 25rem;
+  border-radius: 0.6rem;
+  padding: 1.5rem;
+}
+
+.credit-card-container div {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Header */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-header__title {
+  color: white;
+  font-weight: bolder;
+  font-size: 1.6rem;
+}
+
+.card-header__divider {
+  height: 1.5rem;
+  width: 0.1rem;
+  background-color: rgb(50 65 84);
+}
+
+.card-header__subtitle {
+  color: rgb(50 65 84);
+  font-weight: bold;
+}
+
+.card-header__icon {
+  color: rgb(50 65 84);
+  font-size: 1.6rem;
+}
+
+/* Chip */
+.card-chip {
+  width: 3.5rem;
+  margin-top: 1rem;
+}
+
+/* Card Number */
+.card-number-section {
+  flex-direction: column;
+  color: rgb(50 65 84);
+}
+
+.card-number__value {
+  font-size: 1.3rem;
+  word-spacing: 0.8rem;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+}
+
+.card-number__label {
+  width: 100%;
+  text-align: right;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+/* Footer */
+.card-footer {
+  width: 23.5rem;
+}
+
+.card-footer__details {
+  flex: 1;
+}
+
+/* Expiration Date */
+.card-expiration {
+  display: flex;
+  justify-content: end;
+  gap: 0.2rem;
+  margin: 0.4rem 0;
+}
+
+.card-expiration__label {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.card-expiration__label small {
+  color: rgb(50 65 84);
+  font-size: 0.5rem;
+}
+
+.card-expiration__value {
+  color: rgb(50 65 84);
+  font-weight: bold;
+}
+
+/* Card Holder */
+.card-holder__name {
+  color: rgb(50 65 84);
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+/* Brand Logo */
+.card-brand-logo {
+  width: 6rem;
+  margin-top: -1.3rem;
+}
+
+/* Error Message */
+.error-message {
+  margin-top: 0.8rem;
+  color: red;
+  max-width: 12rem;
+  font-size: 0.8rem;
 }
