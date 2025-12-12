@@ -1,46 +1,116 @@
-# Getting Started with Create React App
+# Proyecto React + TypeScript — Formulario y Maquetación de Tarjeta de Crédito
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este proyecto fue creado utilizando **Create React App** con la plantilla de **TypeScript** mediante el comando:
 
-## Available Scripts
+```bash
+npx create-react-app --template typescript
+```
 
-In the project directory, you can run:
+El objetivo principal es construir la maquetación de una tarjeta de crédito junto con un formulario totalmente funcional que permita enviar los datos al backend para agregar la tarjeta a la base de datos.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 🚀 Características principales
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Maquetación fiel del diseño suministrado.
+- Vista dinámica: al editar los campos de la tarjeta, el diseño mostrado se actualiza en tiempo real.
+- Validaciones estrictas en todos los campos.
+- Muestra de mensajes de error en color rojo cuando un campo no cumple las reglas.
+- Cada tarjeta agregada cuenta con un identificador único.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 📁 Estructura del formulario y reglas de negocio
 
-### `npm run build`
+### 🔹 1. Maquetación y validaciones
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+El formulario cuenta con los siguientes campos, cada uno con sus reglas específicas:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### **a) Todos los campos son requeridos.**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### **b) Los campos interactúan dinámicamente con el diseño de la tarjeta.**
 
-### `npm run eject`
+- Número de tarjeta.
+- Fecha de vencimiento.
+- Nombre del titular.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### **c) Campo Número de tarjeta**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Solo permite **números**.
+- Máximo **16 caracteres**.
+- Los cambios se reflejan en la tarjeta.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### **d) Fecha de vencimiento (mm/yy)**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Formato obligatorio: **mm/yy**.
 
-## Learn More
+### **e) Reglas de validación para fecha**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Mes válido: **01 a 12**.
+- Año válido: desde **22** hasta **año actual + 5**.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### **f) Nombre del titular**
+
+- Solo permite **letras** y **letras con tildes**.
+- Máximo **20 caracteres**.
+- Se actualiza en la tarjeta en tiempo real.
+
+### **g) Mensajes de error**
+
+- En caso de que un campo no sea válido, se debe mostrar un texto en **rojo**, debajo del campo, explicando el motivo de la invalidez.
+
+---
+
+## 🔹 2. Funcionalidad del botón "Agregar tarjeta"
+
+Al pulsar el botón:
+
+### **a) La tarjeta se agrega a un bloque listado**
+
+### **b) Cada tarjeta debe tener un identificador único**
+
+- El identificador se genera con UUID.
+
+### **c) Validación obligatoria antes de agregar**
+
+- Si algún campo no es válido, el sistema muestra los mensajes de error correspondientes debajo de cada campo.
+- Si todo es válido, se agrega la tarjeta al listado.
+
+---
+
+## 🔧 Tecnologías utilizadas
+
+- **React**
+- **TypeScript**
+- **CSS**
+- **UUID para generar identificadores únicos**
+
+---
+
+## ▶️ Cómo ejecutar el proyecto
+
+1. Clonar el repositorio:
+
+```bash
+git clone <https://github.com/adrianjose01/credit-card>
+```
+
+2. Instalar las dependencias:
+
+```bash
+npm install
+```
+
+3. Ejecutar el proyecto en modo desarrollo:
+
+```bash
+npm start
+```
+
+4. Abrir en el navegador:
+
+```
+http://localhost:3000
+```
+
+---
