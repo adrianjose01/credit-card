@@ -17,7 +17,9 @@ const CreditCard: FC<Props> = ({ data, error }) => {
   useEffect(() => {
     if (
       (hasError.includes("cardName") && hasError.includes("cardNumber")) ||
-      (hasError.includes("expirationDate") && hasError.includes("cvvNumber"))
+      (hasError.includes("expirationDate") && hasError.includes("cvvNumber")) ||
+      (hasError.includes("cardNumber") && hasError.includes("cvvNumber")) ||
+      (hasError.includes("expirationDate") && hasError.includes("cardName"))
     ) {
       setBottom("70%");
     } else {

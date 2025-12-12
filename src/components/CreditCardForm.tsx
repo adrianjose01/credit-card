@@ -2,6 +2,9 @@ import { ChangeEvent, Dispatch, FC, FormEvent, SetStateAction } from "react";
 import { IFormData } from "../types/IFormData";
 import { IError } from "../types/IError";
 import { IFieldName } from "../types/IFieldName";
+import { isValidExpiry } from "../utils/isValidExpiry";
+import { API_URL } from "../App";
+import { v4 as uuidv4 } from "uuid";
 
 interface Props {
   onUpdate: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -21,13 +24,14 @@ const CreditCardForm: FC<Props> = ({
   const { cardNumber, expirationDate, cvvNumber, cardName } = formData;
   const { hasError, messages } = error;
 
-  const submitForm = (event: FormEvent): void => {
+  const submitForm = async (event: FormEvent) => {
     event.preventDefault();
 
     const cardNumberRegex = /^\d{0,16}$/;
     const expiryRegex = /^\d{0,2}(\/\d{0,2})?$/;
     const cvvRegex = /^\d{0,3}$/;
     const cardNameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]{0,20}$/;
+    const idRegex = /^.*$/;
 
     // FIELDS VALIDATION
 
@@ -36,6 +40,7 @@ const CreditCardForm: FC<Props> = ({
       expirationDate: expiryRegex,
       cvvNumber: cvvRegex,
       cardName: cardNameRegex,
+      id: idRegex,
     };
 
     Object.keys(formData).forEach((field) => {
@@ -50,7 +55,28 @@ const CreditCardForm: FC<Props> = ({
       }));
     });
 
-    console.log(formData);
+    if (!isValidExpiry(formData.expirationDate))
+      return setError((prevErr) => ({
+        ...prevErr,
+        hasError: [...new Set([...prevErr.hasError, "expirationDate"])],
+      }));
+
+    try {
+      const response = await fetch(`${API_URL}/create-card`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, id: uuidv4() }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+
+      const result = await response.json();
+      alert(result.message);
+    } catch (error: any) {
+      alert(error.message);
+    }
   };
 
   return (

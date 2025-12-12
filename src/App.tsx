@@ -1,9 +1,11 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import CreditCard from "./components/CreditCard";
 import CreditCardForm from "./components/CreditCardForm";
 import { IFormData } from "./types/IFormData";
 import { IError } from "./types/IError";
 import { IFieldName } from "./types/IFieldName";
+
+export const API_URL = "http://localhost:3001";
 
 function App() {
   const [formData, setFormData] = useState<IFormData>({
@@ -11,6 +13,7 @@ function App() {
     cardNumber: "",
     cvvNumber: "",
     expirationDate: "",
+    id: "",
   });
   const [error, setError] = useState<IError>({
     hasError: [],
@@ -24,6 +27,22 @@ function App() {
     },
   });
 
+  useEffect(() => {
+    const fetchCard = async () => {
+      try {
+        const response = await fetch(`${API_URL}/get-cards`);
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+        const data: IFormData[] = await response.json();
+        console.log(data);
+      } catch (err: any) {
+        alert(err.message);
+      }
+    };
+    fetchCard();
+  }, []);
+
   const onChangeField = (event: ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target;
 
@@ -31,6 +50,7 @@ function App() {
     const expiryRegex = /^\d{0,2}(\/\d{0,2})?$/;
     const cvvRegex = /^\d{0,3}$/;
     const cardNameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]{0,20}$/;
+    const idRegex = /^.*$/;
 
     // FIELDS VALIDATION
     const validators: Record<IFieldName, RegExp> = {
@@ -38,6 +58,7 @@ function App() {
       expirationDate: expiryRegex,
       cvvNumber: cvvRegex,
       cardName: cardNameRegex,
+      id: idRegex,
     };
 
     if (Object.keys(validators).includes(name)) {
@@ -62,6 +83,7 @@ function App() {
 
   const clearForm = (): void => {
     setFormData({
+      id: "",
       cardName: "",
       cardNumber: "",
       cvvNumber: "",

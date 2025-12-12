@@ -2,4 +2,5 @@ export type IFieldName =
   | "cardNumber"
   | "expirationDate"
   | "cvvNumber"
-  | "cardName";
+  | "cardName"
+  | "id";
